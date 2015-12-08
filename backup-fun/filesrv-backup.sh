@@ -2,7 +2,7 @@
 # A simple script to manage backups on a local file server. May become simpler or more complex as necessary.
 # gravcat, 2015-12-07
 
-version = 0.1a
+version=0.1a
 time=`date +%Y-%m-%d-%H.%M`
 inputdir=/mnt/backups/filesrv_1
 outputdir=/mnt/backups/upload-ready
