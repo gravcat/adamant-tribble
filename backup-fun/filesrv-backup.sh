@@ -4,22 +4,18 @@
 
 # general info and settings
 version=0.2a
-time=`date +%Y-%m-%d-%H.%M`
+time=`date +%Y-%m-%d`
 
 # tar settings
 inputdir=/mnt/backups/filesrv_1
 outputdir=/mnt/backups/upload-ready
-outputname=filesrv-backup-$TIME.tar.gz
-compression=cpzf
-no-compression=cpf
+outputname=filesrv-backup-"`date +%Y-%m-%d`".tar.gz
 
 # notification settings
-api1=https://hooks.slack.com/
-api2=services/T0CUBMMGC/B0G3HBAR1/4WfH9labHb4BpnAxNhCOD4DX
-api3=$api1$api2
+api1=https://hooks.slack.com/services/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
 
 
-tar -$no-compression $outputdir/$outputname $inputdir
-echo "Completed backup at $time."
+tar -cpPf $outputdir/$outputname $inputdir
+echo "Completed backup at `date +%Y-%m-%d_%H.%M` (UTC [-6])."
 
-curl -X POST --data-urlencode 'payload="text": "Sir, the filesrv backup has completed at $time.", "channel": "#monitoring", "username": "Codsworth", "iron_emoji": ":codsworth:"}' $api3
+curl -X POST --data-urlencode 'payload="text": "Sir, the filesrv backup has completed at $TIME.", "channel": "#monitoring", "username": "Codsworth", "iron_emoji": ":codsworth:"}' $api1
