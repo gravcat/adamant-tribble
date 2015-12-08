@@ -3,11 +3,16 @@
 #	To "extract" the archive, "cat filesrv-backup-$TIME.tar.gz.* | tar xzvf" should do the trick in rejoining the files.
 # gravcat, 2015-12-07
 
+# general info and settings
 version=0.1a
 time=`date +%Y-%m-%d-%H.%M`
+
+# tar settings
 inputdir=/mnt/backups/filesrv_1
 outputdir=/mnt/backups/upload-ready
 outputname=filesrv-backup-$TIME.tar.gz.
+
+# notification settings
 api1=https://hooks.slack.com/
 api2=services/T0CUBMMGC/B0G3HBAR1/4WfH9labHb4BpnAxNhCOD4DX
 api3=$API1$API2
