@@ -8,16 +8,16 @@ version=0.1a
 
 tar -cf - /mnt/backups/filesrv_1/ | split -d -b 8192m - /mnt/backups/staging/split/filesrv_backup_`date +%Y-%m-%d`.tar.
 if [ "$?" != "0" ]; then
-	echo "Issue creating tar file!" 1>&2
+	curl -X POST --data-urlencode 'payload={"channel": "#monitoring", "username": "Codsworth", "text": "[filesrv-backup] Sir, there appears to have been a problem with the archival or splitting procedures.", "icon_emoji": ":codsworth:"}' https://hooks.slack.com/services/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 1>&2
 	exit 1
 fi
 
 mv /mnt/backups/staging/filesrv_backup_* /mnt/backups/uploady-ready/`date +%Y-%m-%d`/
 if [ "$?" != "0" ]; then
-	echo "Issue moving files into upload-ready directory!" 1>&2
+	curl -X POST --data-urlencode 'payload={"channel": "#monitoring", "username": "Codsworth", "text": "[filesrv-backup] Sir, the move operation has encountered something of a struggle...", "icon_emoji": ":codsworth:"}' https://hooks.slack.com/services/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 1>&2
 	exit 1
 fi
 
 echo "Completed backup at `date +%Y-%m-%d-%H.%M`"
 
-curl -X POST --data-urlencode 'payload={"channel": "#monitoring", "username": "Codsworth", "text": "Sir, the filesrv backup has been completed.", "icon_emoji": ":codsworth:"}' https://hooks.slack.com/services/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
+curl -X POST --data-urlencode 'payload={"channel": "#monitoring", "username": "Codsworth", "text": "[filesrv-backup] Sir, the filesrv backup has been completed.", "icon_emoji": ":codsworth:"}' https://hooks.slack.com/services/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
